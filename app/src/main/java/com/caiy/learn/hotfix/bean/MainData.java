@@ -24,4 +24,12 @@ public class MainData {
     public void setMd5(String md5) {
         this.md5 = md5;
     }
+
+    @Override
+    public String toString() {
+        return "MainData{" +
+                "url='" + url + '\'' +
+                ", md5='" + md5 + '\'' +
+                '}';
+    }
 }

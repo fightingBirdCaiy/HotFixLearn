@@ -3,6 +3,7 @@ package com.caiy.learn.hotfix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.caiy.learn.hotfix.bean.MainData;
 import com.caiy.learn.hotfix.manager.MainManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
     private void initData(){
         mainManager = new MainManager(this);
         mainManager.init();
-        mainManager.initWithString("MainActivity");
+        MainData mainData = new MainData();
+        mainData.setUrl("hotfix://mainData");
+        mainData.setMd5("nothing");
+        mainManager.initWithMainData(mainData);
     }
 
     @Override

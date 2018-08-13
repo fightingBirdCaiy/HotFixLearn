@@ -3,6 +3,8 @@ package com.caiy.learn.hotfix.manager;
 import android.content.Context;
 import android.util.Log;
 
+import com.caiy.learn.hotfix.bean.MainData;
+
 /**
  * Created by caiyong on 2018/8/13.
  */
@@ -21,7 +23,7 @@ public class MainManager {
         Log.i(TAG,"init");
     }
 
-    public void initWithString(String message){
-        Log.i(TAG,"init:" + message);
+    public void initWithMainData(MainData mainData){
+        Log.i(TAG,"init:" + mainData);
     }
 }
