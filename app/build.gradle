@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'hotfix'
+            keyPassword 'hotfix'
+            storeFile file('../hotfix.keystore')
+            storePassword 'hotfix'
+        }
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.caiy.learn.hotfix"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.config
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        live {}
+        video {}
+    }
+    applicationVariants.all {
+        variant ->
+            def variantName = variant.name.toLowerCase()
+            if (variantName.contains("debug")) {
+                println("------忽略debug构建:variant.name=" + variantName + "------")
+                return;
+            }
+            println("------当前构建:variant.name=" + variantName + "------")
+            JavaCompile javaCompile = variant.javaCompile
+            println("-----javaCompile=" + javaCompile.toString() + "------")
+            println("-----javaCompile.destinationDir=" + javaCompile.destinationDir.toString() + "------")
+            println("-----javaCompile.classpath.asPath=" + javaCompile.classpath.asPath + "------")
+            println("-----android.bootClasspath=" + android.bootClasspath.join(File.separator) + "------")
+            javaCompile.doLast {
+                String[] args = ["-showWeaveInfo",
+                                 "-1.5",
+                                 "-inpath", javaCompile.destinationDir.toString(),
+                                 "-aspectpath", javaCompile.classpath.asPath,
+                                 "-d", javaCompile.destinationDir.toString(),
+                                 "-classpath", javaCompile.classpath.asPath,
+                                 "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+                MessageHandler handler = new MessageHandler(true)
+                Main main = new Main()
+                main.run(args, handler)
+                for (IMessage message : handler.getMessages(null, true)) {
+                    switch (message.getKind()) {
+                        case IMessage.ABORT:
+                        case IMessage.ERROR:
+                        case IMessage.FAIL:
+                            logger.log(LogLevel.ERROR, "------" + message.message, (Throwable)message.thrown)
+                            println("ERROR------" + message.message);
+                            break;
+                        case IMessage.WARNING:
+                            logger.log(LogLevel.WARN, "------" + message.message, (Throwable)message.thrown)
+                            println("WARN------" + message.message);
+                            break;
+                        case IMessage.INFO:
+                            logger.log(LogLevel.INFO, "------" + message.message, (Throwable)message.thrown)
+                            println("INFO------" + message.message);
+                            break;
+                        case IMessage.DEBUG:
+                            logger.log(LogLevel.DEBUG, "------" + message.message, (Throwable)message.thrown)
+                            println("DEBUG------" + message.message);
+                            break;
+                    }
+                }
+            }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'org.aspectj:aspectjrt:1.8.1'
+}
