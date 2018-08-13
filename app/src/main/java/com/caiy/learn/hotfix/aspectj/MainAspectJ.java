@@ -17,8 +17,12 @@ import org.aspectj.lang.annotation.Pointcut;
 public class MainAspectJ {
 
     private static final String TAG = "MainAspectJ";
+    private static final String POINTCUT_EXPRESS = "execution(* com.caiy.learn.hotfix..*.*(..))" +
+                                            " && !execution(* com.caiy.learn.hotfix.bean..*.*(..))" +
+                                            " && !execution(* com.caiy.learn.hotfix.aspectj..*.*(..))"
+                                            ;
 
-    @Pointcut("execution(* com.caiy.learn.hotfix.*.*(..))")
+    @Pointcut(value = POINTCUT_EXPRESS)
     public void executionMain(){
 
     }

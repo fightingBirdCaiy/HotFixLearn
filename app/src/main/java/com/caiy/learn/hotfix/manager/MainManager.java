@@ -1,6 +1,7 @@
 package com.caiy.learn.hotfix.manager;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Created by caiyong on 2018/8/13.
@@ -8,11 +9,19 @@ import android.content.Context;
 
 public class MainManager {
 
+    private static final String TAG = "MainManager";
+
     private Context mContext;
 
     public MainManager(Context context){
         mContext = context;
     }
 
+    public void init(){
+        Log.i(TAG,"init");
+    }
 
+    public void initWithString(String message){
+        Log.i(TAG,"init:" + message);
+    }
 }

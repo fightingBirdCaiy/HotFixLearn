@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData(){
         mainManager = new MainManager(this);
+        mainManager.init();
+        mainManager.initWithString("MainActivity");
     }
 
     @Override
