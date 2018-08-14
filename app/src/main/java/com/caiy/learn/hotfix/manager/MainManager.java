@@ -23,7 +23,7 @@ public class MainManager {
         Log.i(TAG,"init");
     }
 
-    public void initWithMainData(MainData mainData){
-        Log.i(TAG,"init:" + mainData);
+    public void initWithMainData(MainData mainData,String message){
+        Log.i(TAG,"mainData=" + mainData + ",message=" + message);
     }
 }

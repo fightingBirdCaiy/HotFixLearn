@@ -2,11 +2,14 @@ package com.caiy.learn.hotfix;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.caiy.learn.hotfix.bean.MainData;
 import com.caiy.learn.hotfix.manager.MainManager;
+import com.caiy.learn.hotfix.util.MainUtil;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     private MainManager mainManager;
 
@@ -23,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
         MainData mainData = new MainData();
         mainData.setUrl("hotfix://mainData");
         mainData.setMd5("nothing");
-        mainManager.initWithMainData(mainData);
+        mainManager.initWithMainData(mainData,"mainDataMessage");
+        int screenWidth = MainUtil.getScreenWidth(this);
+        Log.i(TAG,String.format("screenWidth=%d",screenWidth));
     }
 
     @Override

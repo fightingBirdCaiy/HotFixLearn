@@ -100,6 +100,7 @@
 }
 #-------------------------------------------基本不用动区域end--------------------------------------------
 
-
+#插桩相关类不混淆
 -keep class com.caiy.learn.hotfix.aspectj.** { *; }
+#bean类不混淆
 -keep class com.caiy.learn.hotfix.bean.** { *; }

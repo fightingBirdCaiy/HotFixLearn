@@ -28,7 +28,7 @@ android {
             signingConfig signingConfigs.config
             minifyEnabled true
             debuggable false
-            useProguard true
+//            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -96,4 +96,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'org.aspectj:aspectjrt:1.8.1'
+    compile project(path: ':util')
 }
