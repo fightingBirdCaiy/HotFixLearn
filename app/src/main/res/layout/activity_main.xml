@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.caiy.learn.hotfix.MainActivity">
+    tools:context="com.caiy.learn.hotfix.MainActivity"
+    android:orientation="vertical"
+    >
 
-    <TextView
+    <Button
+        android:id="@+id/btn_generate_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="点我生成文件"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_get_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点我查询文件"
+        />
+
+    <Button
+        android:id="@+id/btn_delete_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点我删除文件"
+        />
+
+</LinearLayout>
